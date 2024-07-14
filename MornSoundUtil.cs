@@ -9,8 +9,7 @@ namespace MornSound
 #else
         private const bool ShowLOG = true;
 #endif
-
-        private const string Prefix = "[MornSound] ";
+        private const string Prefix = "[<color=green>MornSound</color>] ";
 
         internal static void Log(string message)
         {
