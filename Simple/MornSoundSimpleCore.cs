@@ -22,7 +22,7 @@ namespace MornSound
                     MornSoundUtil.LogError($"Duplicate key {key}.");
         }
 
-        public void Play(string clipName, float volumeRate = 1)
+        void IMornSoundSimple.Play(string clipName, float volumeRate = 1)
         {
             if (_cachedClipEntitiesDict.TryGetValue(clipName, out var clipEntity))
             {
@@ -39,7 +39,17 @@ namespace MornSound
             MornSoundUtil.LogWarning($"Clip name {clipName} not found.");
         }
 
-        public void Play(MornSoundSimpleClipEntity clipEntity, float volumeRate = 1)
+        void IMornSoundSimple.Play(MornSoundSimpleClipEntity clipEntity, float volumeRate = 1)
+        {
+            Play(clipEntity, volumeRate);
+        }
+
+        void IMornSoundSimple.Play(AudioClip clip, float volumeRate = 1)
+        {
+            Play(clip, volumeRate);
+        }
+        
+        private void Play(MornSoundSimpleClipEntity clipEntity, float volumeRate = 1)
         {
             var soundPlayer = _pool.Rent();
             soundPlayer.Play(
@@ -52,7 +62,7 @@ namespace MornSound
                 }, _pool.Return);
         }
 
-        public void Play(AudioClip clip, float volumeRate = 1)
+        private void Play(AudioClip clip, float volumeRate = 1)
         {
             var soundPlayer = _pool.Rent();
             soundPlayer.Play(
