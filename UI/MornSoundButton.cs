@@ -12,12 +12,12 @@ namespace MornSound.UI
     {
         [SerializeField] private string _onSelected;
         [SerializeField] private string _onSubmit;
-        private IMornSoundSimplePlayer _player;
+        private IMornSoundSimple _player;
 
         private void Awake()
         {
             _player = VContainerSettings.Instance.GetOrCreateRootLifetimeScopeInstance().Container
-                .Resolve<IMornSoundSimplePlayer>();
+                .Resolve<IMornSoundSimple>();
         }
 
         public void OnSelect(BaseEventData eventData)

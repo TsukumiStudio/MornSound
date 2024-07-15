@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace MornSound
 {
-    public sealed class MornSoundSimpleCore : IMornSoundSimplePlayer
+    public sealed class MornSoundSimpleCore : IMornSoundSimple
     {
         private readonly Dictionary<string, AudioClip> _cachedClipDict;
         private readonly Dictionary<string, MornSoundSimpleClipEntity> _cachedClipEntitiesDict;
