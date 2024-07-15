@@ -3,7 +3,6 @@
     "rootNamespace": "MornSound",
     "references": [
         "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:560b04d1a97f54a4e82edc0cbbb69285"
     ],
     "includePlatforms": [],
@@ -13,12 +12,6 @@
     "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "jp.hadashikick.vcontainer",
-            "expression": "",
-            "define": "USE_VCONTAINER"
-        }
-    ],
+    "versionDefines": [],
     "noEngineReferences": false
 }
