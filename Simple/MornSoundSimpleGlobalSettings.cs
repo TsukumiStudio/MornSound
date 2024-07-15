@@ -1,6 +1,10 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace MornSound
 {
@@ -20,6 +24,15 @@ namespace MornSound
         {
             Instance = this;
             MornSoundUtil.Log("Global Settings Loaded");
+#if UNITY_EDITOR
+            var preloadedAssets = PlayerSettings.GetPreloadedAssets().ToList();
+            if (preloadedAssets.Contains(this) &&
+                preloadedAssets.Count(x => x is MornSoundSimpleGlobalSettings) == 1) return;
+            preloadedAssets.RemoveAll(x => x is MornSoundSimpleGlobalSettings);
+            preloadedAssets.Add(this);
+            PlayerSettings.SetPreloadedAssets(preloadedAssets.ToArray());
+            MornSoundUtil.Log("Global Settings Added to Preloaded Assets!");
+#endif
         }
 
         private void OnDisable()
