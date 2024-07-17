@@ -7,8 +7,10 @@ namespace MornSound
     {
         private readonly Dictionary<string, AudioClip> _cachedClipDict;
         private readonly Dictionary<string, MornSoundSimpleClipEntity> _cachedClipEntitiesDict;
+        private readonly Dictionary<string, float> _lastPlayTimeCache = new();
         private readonly MornSoundSimplePool _pool;
 
+        private const float DuplicateInterval = 0.03f;
         public MornSoundSimpleCore(Transform parent)
         {
             _pool = new MornSoundSimplePool(parent);
@@ -51,6 +53,12 @@ namespace MornSound
         
         private void Play(MornSoundSimpleClipEntity clipEntity, float volumeRate = 1)
         {
+            if(_lastPlayTimeCache.TryGetValue(clipEntity.AudioClip.name, out var lastPlayTime) && Mathf.Abs(Time.unscaledTime-lastPlayTime) < DuplicateInterval)
+            {
+                return;
+            }
+            _lastPlayTimeCache[clipEntity.AudioClip.name] = Time.unscaledTime;
+            
             var soundPlayer = _pool.Rent();
             soundPlayer.Play(
                 new MornSoundSimpleConfig
@@ -64,6 +72,12 @@ namespace MornSound
 
         private void Play(AudioClip clip, float volumeRate = 1)
         {
+            if(_lastPlayTimeCache.TryGetValue(clip.name, out var lastPlayTime) && Mathf.Abs(Time.unscaledTime-lastPlayTime) < DuplicateInterval)
+            {
+                return;
+            }
+            _lastPlayTimeCache[clip.name] = Time.unscaledTime;
+            
             var soundPlayer = _pool.Rent();
             soundPlayer.Play(
                 new MornSoundSimpleConfig
