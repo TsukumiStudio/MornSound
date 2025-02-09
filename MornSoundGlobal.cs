@@ -1,12 +1,12 @@
 using System.Collections.Generic;
+using System.Linq;
 using MornGlobal;
 using UnityEngine;
-using UnityEngine.Audio;
 
 namespace MornSound
 {
     [CreateAssetMenu(fileName = nameof(MornSoundGlobal), menuName = "Morn/" + nameof(MornSoundGlobal))]
-    public class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
+    public sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
     {
 #if DISABLE_MORN_SOUND_LOG
         protected override bool ShowLog => false;
@@ -14,11 +14,19 @@ namespace MornSound
         protected override bool ShowLog => true;
 #endif
         protected override string ModuleName => nameof(MornSound);
-        [SerializeField] private AudioMixerGroup _audioMixerGroup;
-        [SerializeField] private List<MornSoundSimpleClipEntity> _clipEntities;
-        [SerializeField] private List<AudioClip> _clips;
-        internal AudioMixerGroup AudioMixerGroup => _audioMixerGroup;
-        internal List<MornSoundSimpleClipEntity> ClipEntities => _clipEntities;
-        internal List<AudioClip> Clips => _clips;
+        [SerializeField] private List<MornSoundInfo> _infos;
+
+        internal bool TryGetInfo(AudioClip clip, out MornSoundInfo info)
+        {
+            var found = _infos.FirstOrDefault(x => x.AudioClip == clip);
+            if (found != null)
+            {
+                info = found;
+                return true;
+            }
+
+            info = null;
+            return false;
+        }
     }
 }
