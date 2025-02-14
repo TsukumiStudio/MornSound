@@ -1,7 +1,9 @@
 using System;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace MornSound
 {
@@ -17,6 +19,7 @@ namespace MornSound
         public float Pitch => 1 * Mathf.Pow(2, Random.Range(_semitoneDownRange, _semitoneUpRange) / 12f);
     }
 
+#if UNITY_EDITOR
     [CustomPropertyDrawer(typeof(MornSoundInfo))]
     public class MornSoundInfoDrawer : PropertyDrawer
     {
@@ -47,4 +50,5 @@ namespace MornSound
             return EditorGUIUtility.singleLineHeight * 4;
         }
     }
+#endif
 }
