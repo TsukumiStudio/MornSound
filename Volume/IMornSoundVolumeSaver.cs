@@ -4,7 +4,7 @@ namespace MornSound
 {
     public interface IMornSoundVolumeSaver
     {
-        IObservable<MornSoundVolumeType> OnVolumeSaved { get; }
+        IObservable<MornSoundVolumeType> OnVolumeChanged { get; }
         float Load(MornSoundVolumeType key);
         void Save(MornSoundVolumeType key, float volumeRate);
     }

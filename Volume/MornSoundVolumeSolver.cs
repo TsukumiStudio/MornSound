@@ -17,7 +17,7 @@ namespace MornSound
         public void Initialize(IMornSoundVolumeSaver saver)
         {
             _saver = saver;
-            _saver.OnVolumeSaved.Subscribe(ApplyVolume).AddTo(this);
+            _saver.OnVolumeChanged.Subscribe(ApplyVolume).AddTo(this);
         }
 
         private async void Start()
