@@ -31,7 +31,7 @@ namespace MornSound
         {
             if (clip == null)
             {
-                MornSoundGlobal.I.LogWarning("指定されたAudioClipがnullです");
+                MornSoundGlobal.LogWarning("指定されたAudioClipがnullです");
                 return;
             }
 

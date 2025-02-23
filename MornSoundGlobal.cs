@@ -6,17 +6,12 @@ using UnityEngine;
 namespace MornSound
 {
     [CreateAssetMenu(fileName = nameof(MornSoundGlobal), menuName = "Morn/" + nameof(MornSoundGlobal))]
-    public sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
+    internal sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
     {
-#if DISABLE_MORN_SOUND_LOG
-        protected override bool ShowLog => false;
-#else
-        protected override bool ShowLog => true;
-#endif
-        protected override string ModuleName => nameof(MornSound);
         [SerializeField] private List<MornSoundInfo> _infos;
+        protected override string ModuleName => nameof(MornSound);
 
-        internal bool TryGetInfo(AudioClip clip, out MornSoundInfo info)
+        public bool TryGetInfo(AudioClip clip, out MornSoundInfo info)
         {
             var found = _infos.FirstOrDefault(x => x.AudioClip == clip);
             if (found != null)
@@ -27,6 +22,21 @@ namespace MornSound
 
             info = null;
             return false;
+        }
+
+        public static void Log(string message)
+        {
+            I.LogInternal(message);
+        }
+
+        public static void LogWarning(string message)
+        {
+            I.LogWarningInternal(message);
+        }
+
+        public static void LogError(string message)
+        {
+            I.LogErrorInternal(message);
         }
     }
 }
