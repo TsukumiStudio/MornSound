@@ -41,8 +41,6 @@ namespace MornSound
             {
                 MornSoundGlobal.I.Mixer.SetFloat(mixerKey, volumeDecibel);
             }
-
-            MornSoundGlobal.Log($"ApplyVolume: {soundVolumeType.Key} {saveValue} {fadeRate} {volumeDecibel}");
         }
 
         public async UniTask FadeAsync(MornSoundVolumeFadeInfo fadeInfo)
