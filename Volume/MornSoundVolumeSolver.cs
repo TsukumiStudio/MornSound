@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -6,12 +7,12 @@ using UnityEngine;
 
 namespace MornSound
 {
+    [AddComponentMenu("")]
     internal sealed class MornSoundVolumeSolver : MonoBehaviour
     {
         private IMornSoundVolumeSaver _saver;
         private readonly Dictionary<string, float> _fadeRateDict = new();
         private readonly Dictionary<string, CancellationTokenSource> _ctsDict = new();
-        
         private const float DefaultFadeRate = 1;
 
         public void Initialize(IMornSoundVolumeSaver saver)
@@ -22,6 +23,12 @@ namespace MornSound
 
         private async void Start()
         {
+            if (_saver == null)
+            {
+                MornSoundGlobal.LogError("MornSoundVolumeSolver: _saver is null");
+                return;
+            }
+            
             // 1F待ってから反映
             await UniTask.DelayFrame(1);
             var tmpKey = new MornSoundVolumeType();
