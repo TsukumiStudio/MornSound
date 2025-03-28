@@ -18,5 +18,10 @@ namespace MornSound
         {
             await _solver.FadeAsync(fadeInfo);
         }
+        
+        public void FadeImmediate(MornSoundVolumeFadeInfo fadeInfo)
+        {
+            _solver.FadeImmediate(fadeInfo);
+        }
     }
 }
