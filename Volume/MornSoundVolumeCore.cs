@@ -21,7 +21,12 @@ namespace MornSound
         
         public void FadeImmediate(MornSoundVolumeFadeInfo fadeInfo)
         {
-            _solver.FadeImmediate(fadeInfo);
+            _solver.FadeImmediate(fadeInfo.SoundVolumeType, fadeInfo.IsFadeIn);
+        }
+        
+        public void FadeImmediate(MornSoundVolumeType volumeType, bool isFadeIn)
+        {
+            _solver.FadeImmediate(volumeType, isFadeIn);
         }
     }
 }

@@ -82,17 +82,17 @@ namespace MornSound
             ApplyVolume(fadeInfo.SoundVolumeType);
         }
         
-        public void FadeImmediate(MornSoundVolumeFadeInfo fadeInfo)
+        public void FadeImmediate(MornSoundVolumeType volumeType, bool isFadeIn)
         {
-            if (_ctsDict.TryGetValue(fadeInfo.SoundVolumeType.Key, out var cts))
+            if (_ctsDict.TryGetValue(volumeType.Key, out var cts))
             {
                 cts.Cancel();
                 cts.Dispose();
-                _ctsDict.Remove(fadeInfo.SoundVolumeType.Key);
+                _ctsDict.Remove(volumeType.Key);
             }
 
-            _fadeRateDict[fadeInfo.SoundVolumeType.Key] = fadeInfo.IsFadeIn ? 1 : 0;
-            ApplyVolume(fadeInfo.SoundVolumeType);
+            _fadeRateDict[volumeType.Key] = isFadeIn ? 1 : 0;
+            ApplyVolume(volumeType);
         }
     }
 }
