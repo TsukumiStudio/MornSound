@@ -57,17 +57,17 @@ namespace MornSound
             return false;
         }
 
-        public static void Log(string message)
+        internal static void Log(string message)
         {
             I.LogInternal(message);
         }
 
-        public static void LogWarning(string message)
+        internal static void LogWarning(string message)
         {
             I.LogWarningInternal(message);
         }
 
-        public static void LogError(string message)
+        internal static void LogError(string message)
         {
             I.LogErrorInternal(message);
         }
