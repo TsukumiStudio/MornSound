@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using MornGlobal;
@@ -10,21 +9,19 @@ namespace MornSound
     [CreateAssetMenu(fileName = nameof(MornSoundGlobal), menuName = "Morn/" + nameof(MornSoundGlobal))]
     internal sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
     {
-        [Serializable]
-        private struct KeyToVolume
-        {
-            public MornSoundVolumeType VolumeType;
-            public string[] MixerKeys;
-        }
-
         [SerializeField] private List<MornSoundInfo> _infos;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private float _minDb = -80;
+        [Header("Volume")]
         [SerializeField] private string[] _volumeKeys;
         [SerializeField] private List<KeyToVolume> _toMixerKeyList;
+        [Header("AudioSource")]
+        [SerializeField] private string[] _sourceKeys;
+        [SerializeField] private List<KeyToMixerGroup> _toMixerGroupList;
         protected override string ModuleName => nameof(MornSound);
         public AudioMixer Mixer => _mixer;
         public string[] VolumeKeys => _volumeKeys;
+        public string[] SourceKeys => _sourceKeys;
 
         public string[] ToMixerKeys(MornSoundVolumeType volumeType)
         {
@@ -33,6 +30,19 @@ namespace MornSound
                 if (toMixerKey.VolumeType.Key == volumeType.Key)
                 {
                     return toMixerKey.MixerKeys;
+                }
+            }
+
+            return null;
+        }
+
+        public AudioMixerGroup ToMixerGroup(MornSoundSourceType sourceType)
+        {
+            foreach (var toMixerGroup in _toMixerGroupList)
+            {
+                if (toMixerGroup.SourceType.Key == sourceType.Key)
+                {
+                    return toMixerGroup.MixerGroup;
                 }
             }
 
