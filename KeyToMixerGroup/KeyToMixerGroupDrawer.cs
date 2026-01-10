@@ -3,7 +3,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace MornSound
+namespace MornLib
 {
     [CustomPropertyDrawer(typeof(KeyToMixerGroup))]
     public class KeyToMixerGroupDrawer : PropertyDrawer

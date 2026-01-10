@@ -1,9 +1,41 @@
+using System.Threading;
 using UnityEngine;
+using UnityEngine.Audio;
 
-namespace MornSound
+namespace MornLib
 {
     public static class MornSoundUtil
     {
+        public static float ToDecibel(this float rate)
+        {
+            return MornSoundGlobal.I.ToDecibel(rate);
+        }
+
+        public static string[] ToMixerKeys(this MornSoundVolumeType volumeType)
+        {
+            return MornSoundGlobal.I.ToMixerKeys(volumeType);
+        }
+
+        public static AudioMixerGroup ToMixerGroup(this MornSoundSourceType sourceType)
+        {
+            return MornSoundGlobal.I.ToMixerGroup(sourceType);
+        }
+
+        public static AudioSource ToSource(this MornSoundSourceType sourceType)
+        {
+            return MornSoundService.I.GetSource(sourceType);
+        }
+
+        public static CancellationToken ToToken(this MornSoundSourceType sourceType)
+        {
+            return MornSoundService.I.GetFadeToken(sourceType);
+        }
+
+        public static bool TryGetInfo(this AudioClip clip, out MornSoundInfo info)
+        {
+            return MornSoundGlobal.I.TryGetInfo(clip, out info);
+        }
+
         public static void MornPlay(this AudioSource source, AudioClip clip, float volumeScale = 1f)
         {
             if (clip == null)
@@ -11,7 +43,7 @@ namespace MornSound
                 return;
             }
 
-            if (MornSoundGlobal.I.TryGetInfo(clip, out var info))
+            if (clip.TryGetInfo(out var info))
             {
                 source.clip = clip;
                 source.pitch = info.Pitch;
@@ -31,11 +63,11 @@ namespace MornSound
         {
             if (clip == null)
             {
-                MornSoundGlobal.LogWarning("指定されたAudioClipがnullです");
+                MornSoundGlobal.Logger.LogWarning("指定されたAudioClipがnullです");
                 return;
             }
 
-            if (MornSoundGlobal.I.TryGetInfo(clip, out var info))
+            if (clip.TryGetInfo(out var info))
             {
                 source.pitch = info.Pitch;
                 source.volume = 1f;

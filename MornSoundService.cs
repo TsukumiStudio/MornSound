@@ -2,24 +2,24 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-namespace MornSound
+namespace MornLib
 {
-    public sealed class MornSoundSourceCtrl : MonoBehaviour
+    public sealed class MornSoundService : MonoBehaviour
     {
-        private static MornSoundSourceCtrl _instance;
+        private static MornSoundService _instance;
         private readonly Dictionary<string, AudioSource> _audioSourceCache = new();
         private readonly Dictionary<string, CancellationTokenSource> _fadeTokenCache = new();
-        public static MornSoundSourceCtrl I
+        public static MornSoundService I
         {
             get
             {
                 if (_instance == null)
                 {
-                    _instance = FindAnyObjectByType<MornSoundSourceCtrl>();
+                    _instance = FindAnyObjectByType<MornSoundService>();
                     if (_instance == null)
                     {
-                        var obj = new GameObject(nameof(MornSoundSourceCtrl));
-                        _instance = obj.AddComponent<MornSoundSourceCtrl>();
+                        var obj = new GameObject(nameof(MornSoundService));
+                        _instance = obj.AddComponent<MornSoundService>();
                     }
                 }
 
@@ -40,7 +40,7 @@ namespace MornSound
             }
         }
 
-        public AudioSource GetSource(MornSoundSourceType sourceType)
+        internal AudioSource GetSource(MornSoundSourceType sourceType)
         {
             var key = sourceType.Key;
             if (!_audioSourceCache.TryGetValue(key, out var audioSource) || audioSource == null)
@@ -61,11 +61,11 @@ namespace MornSound
                 _audioSourceCache[key] = audioSource;
             }
 
-            audioSource.outputAudioMixerGroup = MornSoundGlobal.I.ToMixerGroup(sourceType);
+            audioSource.outputAudioMixerGroup = sourceType.ToMixerGroup();
             return audioSource;
         }
 
-        public CancellationToken GetFadeToken(MornSoundSourceType sourceType)
+        internal CancellationToken GetFadeToken(MornSoundSourceType sourceType)
         {
             var key = sourceType.Key;
 

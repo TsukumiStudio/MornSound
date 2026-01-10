@@ -1,11 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UniRx;
 using UnityEngine;
 
-namespace MornSound
+namespace MornLib
 {
     [AddComponentMenu("")]
     internal sealed class MornSoundVolumeSolver : MonoBehaviour
@@ -25,10 +24,10 @@ namespace MornSound
         {
             if (_saver == null)
             {
-                MornSoundGlobal.LogError("MornSoundVolumeSolver: _saver is null");
+                MornSoundGlobal.Logger.LogError("Initializeされていません");
                 return;
             }
-            
+
             // 1F待ってから反映
             await UniTask.DelayFrame(1);
             var tmpKey = new MornSoundVolumeType();
@@ -43,8 +42,8 @@ namespace MornSound
         {
             var fadeRate = _fadeRateDict.GetValueOrDefault(soundVolumeType.Key, DefaultFadeRate);
             var saveValue = _saver.Load(soundVolumeType);
-            var volumeDecibel = MornSoundGlobal.I.VolumeRateToDecibel(saveValue * fadeRate);
-            foreach (var mixerKey in MornSoundGlobal.I.ToMixerKeys(soundVolumeType))
+            var volumeDecibel = (saveValue * fadeRate).ToDecibel();
+            foreach (var mixerKey in soundVolumeType.ToMixerKeys())
             {
                 MornSoundGlobal.I.Mixer.SetFloat(mixerKey, volumeDecibel);
             }
@@ -81,7 +80,7 @@ namespace MornSound
             _fadeRateDict[fadeInfo.SoundVolumeType.Key] = aimValue;
             ApplyVolume(fadeInfo.SoundVolumeType);
         }
-        
+
         public void FadeImmediate(MornSoundVolumeType volumeType, bool isFadeIn)
         {
             if (_ctsDict.TryGetValue(volumeType.Key, out var cts))

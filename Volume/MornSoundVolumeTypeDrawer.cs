@@ -3,7 +3,7 @@ using MornEnum;
 using UnityEditor;
 using UnityEngine;
 
-namespace MornSound
+namespace MornLib
 {
     [CustomPropertyDrawer(typeof(MornSoundVolumeType))]
     public class MornSoundVolumeTypeDrawer : MornEnumDrawerBase
