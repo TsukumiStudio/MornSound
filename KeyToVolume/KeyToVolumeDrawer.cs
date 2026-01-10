@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace MornSound
+namespace MornLib
 {
     [CustomPropertyDrawer(typeof(KeyToVolume))]
     public class KeyToVolumeDrawer : PropertyDrawer

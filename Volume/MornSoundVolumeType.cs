@@ -1,7 +1,7 @@
 using System;
 using MornEnum;
 
-namespace MornSound
+namespace MornLib
 {
     [Serializable]
     public class MornSoundVolumeType : MornEnumBase

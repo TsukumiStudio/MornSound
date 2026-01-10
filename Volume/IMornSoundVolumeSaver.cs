@@ -1,6 +1,6 @@
 using System;
 
-namespace MornSound
+namespace MornLib
 {
     public interface IMornSoundVolumeSaver
     {

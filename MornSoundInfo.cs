@@ -1,14 +1,12 @@
 using System;
+using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
-namespace MornSound
+namespace MornLib
 {
     [Serializable]
-    internal class MornSoundInfo
+    public class MornSoundInfo
     {
         [SerializeField] private AudioClip _audioClip;
         [SerializeField] [Range(0, 1)] private float _volumeRate = 1;
@@ -31,7 +29,6 @@ namespace MornSound
                 var volumeRate = property.FindPropertyRelative("_volumeRate");
                 var semitoneDownRange = property.FindPropertyRelative("_semitoneDownRange");
                 var semitoneUpRange = property.FindPropertyRelative("_semitoneUpRange");
-                
                 var rect = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
                 EditorGUI.PropertyField(rect, clip);
                 rect.y += EditorGUIUtility.singleLineHeight;
@@ -40,7 +37,6 @@ namespace MornSound
                 EditorGUI.PropertyField(rect, semitoneDownRange);
                 rect.y += EditorGUIUtility.singleLineHeight;
                 EditorGUI.PropertyField(rect, semitoneUpRange);
-                
             }
             EditorGUI.EndProperty();
         }

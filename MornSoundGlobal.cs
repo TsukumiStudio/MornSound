@@ -1,10 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using MornGlobal;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace MornSound
+namespace MornLib
 {
     [CreateAssetMenu(fileName = nameof(MornSoundGlobal), menuName = "Morn/" + nameof(MornSoundGlobal))]
     internal sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
@@ -18,7 +17,7 @@ namespace MornSound
         [Header("AudioSource")]
         [SerializeField] private string[] _sourceKeys;
         [SerializeField] private List<KeyToMixerGroup> _toMixerGroupList;
-        protected override string ModuleName => nameof(MornSound);
+        public override string ModuleName => "MornSound";
         public AudioMixer Mixer => _mixer;
         public string[] VolumeKeys => _volumeKeys;
         public string[] SourceKeys => _sourceKeys;
@@ -49,13 +48,19 @@ namespace MornSound
             return null;
         }
 
-        public float VolumeRateToDecibel(float rate)
+        public float ToDecibel(float rate)
         {
-            return rate <= 0 ? -5000 : (1 - rate) * _minDb;
+            return rate <= 0 ? -5000 : Mathf.Clamp01(1 - rate) * _minDb;
         }
 
         public bool TryGetInfo(AudioClip clip, out MornSoundInfo info)
         {
+            if (clip == null)
+            {
+                info = null;
+                return false;
+            }
+
             var found = _infos.FirstOrDefault(x => x.AudioClip == clip);
             if (found != null)
             {
@@ -65,21 +70,6 @@ namespace MornSound
 
             info = null;
             return false;
-        }
-
-        internal static void Log(string message)
-        {
-            I.LogInternal(message);
-        }
-
-        internal static void LogWarning(string message)
-        {
-            I.LogWarningInternal(message);
-        }
-
-        internal static void LogError(string message)
-        {
-            I.LogErrorInternal(message);
         }
     }
 }

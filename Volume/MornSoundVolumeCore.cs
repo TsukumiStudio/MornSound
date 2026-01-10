@@ -1,7 +1,7 @@
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace MornSound
+namespace MornLib
 {
     public sealed class MornSoundVolumeCore
     {

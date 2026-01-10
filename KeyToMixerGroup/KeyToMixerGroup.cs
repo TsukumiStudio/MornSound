@@ -1,7 +1,7 @@
 using System;
 using UnityEngine.Audio;
 
-namespace MornSound
+namespace MornLib
 {
     [Serializable]
     internal struct KeyToMixerGroup
