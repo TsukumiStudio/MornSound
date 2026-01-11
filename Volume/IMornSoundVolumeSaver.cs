@@ -6,6 +6,5 @@ namespace MornLib
     {
         IObservable<MornSoundVolumeType> OnVolumeChanged { get; }
         float Load(MornSoundVolumeType key);
-        void Save(MornSoundVolumeType key, float volumeRate);
     }
 }
