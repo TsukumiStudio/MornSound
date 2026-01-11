@@ -17,7 +17,7 @@ namespace MornLib
         [Header("AudioSource")]
         [SerializeField] private string[] _sourceKeys;
         [SerializeField] private List<KeyToMixerGroup> _toMixerGroupList;
-        public override string ModuleName => "MornSound";
+        protected override string ModuleName => "MornSound";
         public AudioMixer Mixer => _mixer;
         public string[] VolumeKeys => _volumeKeys;
         public string[] SourceKeys => _sourceKeys;
