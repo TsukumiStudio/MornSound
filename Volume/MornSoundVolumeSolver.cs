@@ -60,6 +60,7 @@ namespace MornLib
             _ctsDict[key] = CancellationTokenSource.CreateLinkedTokenSource(fadeInfo.CancellationToken);
             var token = _ctsDict[key].Token;
             var duration = fadeInfo.Duration ?? 0;
+            var easeType = fadeInfo.EaseType ?? MornEaseType.Linear;
             var startValue = _fadeRateDict.GetValueOrDefault(fadeInfo.SoundVolumeType.Key, DefaultFadeRate);
             var aimValue = fadeInfo.IsFadeIn ? 1 : 0;
             var isSkip = Mathf.Approximately(startValue, aimValue) || duration <= 0;
@@ -70,7 +71,7 @@ namespace MornLib
                 while (Time.time - startTime < duration)
                 {
                     var timeRate = (Time.time - startTime) / duration;
-                    var rate = Mathf.Clamp01(timeRate);
+                    var rate = Mathf.Clamp01(timeRate).Ease(easeType);
                     _fadeRateDict[fadeInfo.SoundVolumeType.Key] = Mathf.Lerp(startValue, aimValue, rate);
                     ApplyVolume(fadeInfo.SoundVolumeType);
                     await UniTask.Yield(cancellationToken: token);
