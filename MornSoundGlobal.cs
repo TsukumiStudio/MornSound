@@ -50,7 +50,7 @@ namespace MornLib
 
         public float ToDecibel(float rate)
         {
-            return rate <= 0 ? -5000 : Mathf.Clamp01(1 - rate) * _minDb;
+            return rate <= 0 ? -5000 : _minDb - _minDb * Mathf.Log10(rate * 9 + 1);
         }
 
         public bool TryGetInfo(AudioClip clip, out MornSoundInfo info)
