@@ -67,6 +67,7 @@ namespace MornLib
                 return;
             }
 
+            MornSoundGlobal.Logger.Log("MornPlayOneShot: " + clip.name);
             if (clip.TryGetInfo(out var info))
             {
                 source.pitch = info.Pitch;
