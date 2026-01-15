@@ -59,7 +59,10 @@ namespace MornLib
             }
         }
 
-        public static void MornPlayOneShot(this AudioSource source, AudioClip clip, float volumeScale = 1f)
+        public static void MornPlayOneShot(this AudioSource source,
+            AudioClip clip,
+            float volumeScale = 1f,
+            float pitchScale = 1f)
         {
             if (clip == null)
             {
@@ -67,16 +70,15 @@ namespace MornLib
                 return;
             }
 
-            MornSoundGlobal.Logger.Log("MornPlayOneShot: " + clip.name);
             if (clip.TryGetInfo(out var info))
             {
-                source.pitch = info.Pitch;
+                source.pitch = info.Pitch * pitchScale;
                 source.volume = 1f;
                 source.PlayOneShot(clip, info.VolumeRate * volumeScale);
             }
             else
             {
-                source.pitch = 1f;
+                source.pitch = 1f * pitchScale;
                 source.volume = 1f;
                 source.PlayOneShot(clip, volumeScale);
             }
