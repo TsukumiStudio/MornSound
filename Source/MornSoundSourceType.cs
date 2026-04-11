@@ -5,6 +5,7 @@ namespace MornLib
     [Serializable]
     public class MornSoundSourceType : MornEnumBase
     {
-        protected override string[] Values => MornSoundGlobal.I.SourceKeys;
+        public override string[] Values => MornSoundGlobal.I.SourceKeys;
+        public override UnityEngine.Object PingTarget => MornSoundGlobal.I;
     }
 }

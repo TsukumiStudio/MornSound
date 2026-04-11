@@ -5,6 +5,7 @@ namespace MornLib
     [Serializable]
     public class MornSoundVolumeType : MornEnumBase
     {
-        protected override string[] Values => MornSoundGlobal.I.VolumeKeys;
+        public override string[] Values => MornSoundGlobal.I.VolumeKeys;
+        public override UnityEngine.Object PingTarget => MornSoundGlobal.I;
     }
 }
