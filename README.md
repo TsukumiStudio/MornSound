@@ -1,49 +1,35 @@
 # MornSound
 
+<p align="center">
+  <img src="src/Editor/MornSound.png" alt="MornSound" width="640" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/license/TsukumiStudio/MornSound" alt="License" />
+</p>
+
 ## 概要
 
-AudioSourceの再生とボリュームフェード管理を行うライブラリ。
+Unity の AudioSource / AudioMixer を統一して扱うサウンドシステムラッパー。Volume / Source 種別の文字列キー管理、フェード、Arbor 連携などを提供する。
 
-## 依存関係
+## 導入方法
 
-| 種別 | 名前 |
-|------|------|
-| 外部パッケージ | UniTask |
-| Mornライブラリ | MornGlobal, MornEnum |
+Unity Package Manager で以下の Git URL を追加:
 
-## 使い方
-
-### セットアップ
-
-1. Projectウィンドウで右クリック → `Morn/MornSoundGlobal` を作成
-2. `AudioMixer` を設定
-3. `Infos` にAudioClipごとの設定を追加（音量、ピッチ範囲）
-4. `VolumeKeys` / `SourceKeys` を設定
-
-### AudioSourceの取得
-
-```csharp
-AudioSource source = sourceType.ToSource();
-AudioMixerGroup group = sourceType.ToMixerGroup();
+```
+https://github.com/TsukumiStudio/MornSound.git?path=src#1.0.0
 ```
 
-### 再生
+`Window > Package Manager > + > Add package from git URL...` に貼り付けてください。
 
-```csharp
-// MornSoundInfoの設定を自動適用して再生
-source.MornPlay(clip);
-source.MornPlay(clip, volumeScale: 0.5f);
+### 依存パッケージ
 
-// OneShot再生
-source.MornPlayOneShot(clip);
-```
+- [UniTask](https://github.com/Cysharp/UniTask) (`com.cysharp.unitask`)
+- [UniRx](https://github.com/neuecc/UniRx) (`com.neuecc.unirx`)
+- [Arbor](https://arbor.caitsithware.com/) (Arbor State 連携用)
+- [MornGlobal](https://github.com/TsukumiStudio/MornGlobal) (`com.tsukumistudio.mornglobal`)
+- [MornEnum](https://github.com/TsukumiStudio/MornEnum) (`com.tsukumistudio.mornenum`)
 
-### ボリューム関連
+## ライセンス
 
-```csharp
-// 0〜1のレートをデシベルに変換
-float db = rate.ToDecibel();
-
-// VolumeTypeからMixerのキー配列を取得
-string[] keys = volumeType.ToMixerKeys();
-```
+[The Unlicense](LICENSE)

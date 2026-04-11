@@ -1,0 +1,22 @@
+{
+  "name": "com.tsukumistudio.mornsound",
+  "version": "1.0.0",
+  "displayName": "MornSound",
+  "description": "Unity の AudioSource / AudioMixer を統一して扱うサウンドシステムラッパー。Volume / Source 種別の文字列キー管理、フェード、Arbor 連携などを提供する。",
+  "unity": "6000.0",
+  "license": "Unlicense",
+  "author": {
+    "name": "TsukumiStudio"
+  },
+  "keywords": [
+    "audio",
+    "sound",
+    "audiomixer",
+    "volume",
+    "fade"
+  ],
+  "dependencies": {
+    "com.tsukumistudio.mornglobal": "1.0.0",
+    "com.tsukumistudio.mornenum": "1.0.0"
+  }
+}
