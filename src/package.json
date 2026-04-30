@@ -1,6 +1,6 @@
 {
   "name": "com.tsukumistudio.mornsound",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "MornSound",
   "description": "Unity の AudioSource / AudioMixer を統一して扱うサウンドシステムラッパー。Volume / Source 種別の文字列キー管理、フェード、Arbor 連携などを提供する。",
   "unity": "6000.0",
