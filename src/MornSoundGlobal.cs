@@ -8,15 +8,15 @@ namespace MornLib
     [CreateAssetMenu(fileName = nameof(MornSoundGlobal), menuName = "Morn/" + nameof(MornSoundGlobal))]
     internal sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
     {
-        [SerializeField, NoElementLabel] private List<MornSoundInfo> _infos;
+        [SerializeField, NoLabel] private List<MornSoundInfo> _infos;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private float _minDb = -80;
         [Header("Volume")]
-        [SerializeField, NoElementLabel] private string[] _volumeKeys;
-        [SerializeField, NoElementLabel] private List<KeyToVolume> _toMixerKeyList;
+        [SerializeField, NoLabel] private string[] _volumeKeys;
+        [SerializeField, NoLabel] private List<KeyToVolume> _toMixerKeyList;
         [Header("AudioSource")]
-        [SerializeField, NoElementLabel] private string[] _sourceKeys;
-        [SerializeField, NoElementLabel] private List<KeyToMixerGroup> _toMixerGroupList;
+        [SerializeField, NoLabel] private string[] _sourceKeys;
+        [SerializeField, NoLabel] private List<KeyToMixerGroup> _toMixerGroupList;
         protected override string ModuleName => "MornSound";
         public AudioMixer Mixer => _mixer;
         public string[] VolumeKeys => _volumeKeys;
