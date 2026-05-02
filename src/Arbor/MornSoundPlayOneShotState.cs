@@ -1,9 +1,11 @@
 #if USE_ARBOR
 using Arbor;
+using System;
 using UnityEngine;
 
 namespace MornLib
 {
+    [Serializable]
     internal sealed class MornSoundPlayOneShotState : StateBehaviour
     {
         [SerializeField] private MornSoundSourceType _sourceType;

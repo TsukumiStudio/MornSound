@@ -6,6 +6,7 @@ using UnityEngine;
 namespace MornLib
 {
     [Obsolete("MornSoundPlayOneShotStateやMornSoundPlayOneShotStateを使用してください。")]
+    [Serializable]
     public sealed class PlaySimpleSoundState : StateBehaviour
     {
         [SerializeField] private AudioSource _audioSource;

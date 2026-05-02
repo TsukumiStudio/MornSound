@@ -1,11 +1,13 @@
 #if USE_ARBOR
 using System.Threading;
+using System;
 using Arbor;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 namespace MornLib
 {
+    [Serializable]
     internal sealed class MornSoundStopState : StateBehaviour
     {
         [SerializeField] private MornSoundSourceType _sourceType;
