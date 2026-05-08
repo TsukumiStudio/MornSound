@@ -11,22 +11,22 @@ namespace MornLib
             return MornSoundGlobal.I.ToDecibel(rate);
         }
 
-        public static string[] ToMixerKeys(this MornSoundVolumeType volumeType)
+        public static string[] ToMixerKeys(this MornSoundMixerType volumeType)
         {
             return MornSoundGlobal.I.ToMixerKeys(volumeType);
         }
 
-        public static AudioMixerGroup ToMixerGroup(this MornSoundSourceType sourceType)
+        public static AudioMixerGroup ToMixerGroup(this MornSoundMixerType sourceType)
         {
             return MornSoundGlobal.I.ToMixerGroup(sourceType);
         }
 
-        public static AudioSource ToSource(this MornSoundSourceType sourceType)
+        public static AudioSource ToSource(this MornSoundMixerType sourceType)
         {
             return MornSoundService.I.GetSource(sourceType);
         }
 
-        public static CancellationToken ToToken(this MornSoundSourceType sourceType)
+        public static CancellationToken ToToken(this MornSoundMixerType sourceType)
         {
             return MornSoundService.I.GetFadeToken(sourceType);
         }

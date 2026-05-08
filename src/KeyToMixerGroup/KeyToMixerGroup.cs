@@ -6,7 +6,7 @@ namespace MornLib
     [Serializable]
     internal struct KeyToMixerGroup
     {
-        public MornSoundSourceType SourceType;
+        public MornSoundMixerType SourceType;
         public AudioMixerGroup MixerGroup;
     }
 }

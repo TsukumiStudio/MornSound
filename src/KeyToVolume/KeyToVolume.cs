@@ -5,7 +5,7 @@ namespace MornLib
     [Serializable]
     internal struct KeyToVolume
     {
-        public MornSoundVolumeType VolumeType;
-        public string[] MixerKeys;
+        public MornSoundMixerType VolumeType;
+        [NoLabel] public string[] MixerKeys;
     }
 }

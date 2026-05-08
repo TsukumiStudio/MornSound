@@ -10,7 +10,7 @@ namespace MornLib
     [Serializable]
     internal sealed class MornSoundStopState : StateBehaviour
     {
-        [SerializeField] private MornSoundSourceType _sourceType;
+        [SerializeField] private MornSoundMixerType _sourceType;
         [SerializeField] private float _duration;
 
         public override void OnStateBegin()

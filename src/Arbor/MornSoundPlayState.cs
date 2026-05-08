@@ -10,7 +10,7 @@ namespace MornLib
     [Serializable]
     internal sealed class MornSoundPlayState : StateBehaviour
     {
-        [SerializeField] private MornSoundSourceType _sourceType;
+        [SerializeField] private MornSoundMixerType _sourceType;
         [SerializeField] private bool _isRepeat;
         [SerializeField] private bool _forceInitialize;
         [SerializeField] private AudioClip _clip;

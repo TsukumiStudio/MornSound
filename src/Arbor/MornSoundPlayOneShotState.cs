@@ -8,7 +8,7 @@ namespace MornLib
     [Serializable]
     internal sealed class MornSoundPlayOneShotState : StateBehaviour
     {
-        [SerializeField] private MornSoundSourceType _sourceType;
+        [SerializeField] private MornSoundMixerType _sourceType;
         [SerializeField] private AudioClip _clip;
 
         public override void OnStateBegin()

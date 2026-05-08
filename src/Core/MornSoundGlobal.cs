@@ -6,23 +6,27 @@ using UnityEngine.Audio;
 namespace MornLib
 {
     [CreateAssetMenu(fileName = nameof(MornSoundGlobal), menuName = "Morn/" + nameof(MornSoundGlobal))]
-    internal sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
+    public sealed class MornSoundGlobal : MornGlobalBase<MornSoundGlobal>
     {
         [SerializeField, NoLabel] private List<MornSoundInfo> _infos;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private float _minDb = -80;
         [Header("Volume")]
-        [SerializeField, NoLabel] private string[] _volumeKeys;
+        [SerializeField, NoLabel] private string[] _mixerKeys;
+        [SerializeField] private MornSoundMixerType _masteType;
+        [SerializeField] private MornSoundMixerType _bgmKey;
+        [SerializeField] private MornSoundMixerType _seKey;
         [SerializeField, NoLabel] private List<KeyToVolume> _toMixerKeyList;
         [Header("AudioSource")]
-        [SerializeField, NoLabel] private string[] _sourceKeys;
         [SerializeField, NoLabel] private List<KeyToMixerGroup> _toMixerGroupList;
         protected override string ModuleName => "MornSound";
         public AudioMixer Mixer => _mixer;
-        public string[] VolumeKeys => _volumeKeys;
-        public string[] SourceKeys => _sourceKeys;
+        public string[] MixerKeys => _mixerKeys;
+        public MornSoundMixerType MasterKey => _masteType;
+        public MornSoundMixerType BgmKey => _bgmKey;
+        public MornSoundMixerType SeKey => _seKey;
 
-        public string[] ToMixerKeys(MornSoundVolumeType volumeType)
+        public string[] ToMixerKeys(MornSoundMixerType volumeType)
         {
             foreach (var toMixerKey in _toMixerKeyList)
             {
@@ -35,7 +39,7 @@ namespace MornLib
             return null;
         }
 
-        public AudioMixerGroup ToMixerGroup(MornSoundSourceType sourceType)
+        public AudioMixerGroup ToMixerGroup(MornSoundMixerType sourceType)
         {
             foreach (var toMixerGroup in _toMixerGroupList)
             {
