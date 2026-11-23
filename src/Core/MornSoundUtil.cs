@@ -6,6 +6,8 @@ namespace MornLib
 {
     public static class MornSoundUtil
     {
+        private static readonly MornSoundDuplicateGuard DuplicateGuard = new();
+
         public static float ToDecibel(this float rate)
         {
             return MornSoundGlobal.I.ToDecibel(rate);
@@ -67,6 +69,12 @@ namespace MornLib
             if (clip == null)
             {
                 MornSoundGlobal.Logger.LogWarning("指定されたAudioClipがnullです");
+                return;
+            }
+
+            // 同じ音が同時に重なると音量が足し算で大きくなるので、短い間の2回目以降は鳴らさない
+            if (!DuplicateGuard.TryPass(clip, Time.realtimeSinceStartupAsDouble, MornSoundGlobal.I.DuplicateGuardSeconds))
+            {
                 return;
             }
 
