@@ -11,6 +11,9 @@ namespace MornLib
         [SerializeField, NoLabel] private List<MornSoundInfo> _infos;
         [SerializeField] private AudioMixer _mixer;
         [SerializeField] private float _minDb = -80;
+        [Header("OneShot")]
+        // 同じ AudioClip をこの秒数以内に重ねて MornPlayOneShot したとき、2回目以降を鳴らさない。0 以下で無効
+        [SerializeField] private float _duplicateGuardSeconds = 0.05f;
         [Header("Volume")]
         [SerializeField, NoLabel] private string[] _mixerKeys;
         [SerializeField] private MornSoundMixerType _masteType;
@@ -25,6 +28,7 @@ namespace MornLib
         public MornSoundMixerType MasterKey => _masteType;
         public MornSoundMixerType BgmKey => _bgmKey;
         public MornSoundMixerType SeKey => _seKey;
+        public float DuplicateGuardSeconds => _duplicateGuardSeconds;
 
         public string[] ToMixerKeys(MornSoundMixerType volumeType)
         {
